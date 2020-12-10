@@ -15,14 +15,16 @@
         android:theme="@style/Theme.KotlinDemo"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ImageActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.DemoActivity"></activity>
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ImageActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

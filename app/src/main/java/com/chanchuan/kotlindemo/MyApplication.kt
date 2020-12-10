@@ -2,6 +2,7 @@ package com.chanchuan.kotlindemo
 
 import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDex
 import com.facebook.drawee.backends.pipeline.Fresco
 
 /**
@@ -15,5 +16,6 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Fresco.initialize(this)
+        MultiDex.install(this)
     }
 }

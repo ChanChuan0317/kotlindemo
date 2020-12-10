@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/mainPagerFragment">
+    <tab_fragment
+        android:id="@+id/mainPagerFragment"
+        android:name="com.chanchuan.kotlindemo.fragment.MainPagerFragment"
+        android:label="MainPagerFragment" />
+    <tab_fragment
+        android:id="@+id/questionFragment"
+        android:name="com.chanchuan.kotlindemo.fragment.QuestionFragment"
+        android:label="QuestionFragment" />
+    <tab_fragment
+        android:id="@+id/knowledgeFragment"
+        android:name="com.chanchuan.kotlindemo.fragment.KnowledgeFragment"
+        android:label="KnowledgeFragment" />
+    <tab_fragment
+        android:id="@+id/mineFragment"
+        android:name="com.chanchuan.kotlindemo.fragment.MineFragment"
+        android:label="MineFragment" />
+</navigation>

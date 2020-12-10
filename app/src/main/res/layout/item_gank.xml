@@ -7,4 +7,5 @@
         android:id="@+id/sdv_image"
         android:layout_width="230dp"
         android:layout_height="300dp" />
+
 </LinearLayout>
