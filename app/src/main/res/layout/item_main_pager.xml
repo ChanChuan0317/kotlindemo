@@ -32,6 +32,29 @@
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:text="Android面试黑洞-----当我按下Home键再切回来,会发生什么?" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_classification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="干货资源"
+            android:textSize="@dimen/sp_12" />
+
+
+<!--        <ImageView-->
+<!--            android:id="@+id/btn_collection"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:src="@drawable/select_collection" />-->
+
+    </RelativeLayout>
 
 </LinearLayout>

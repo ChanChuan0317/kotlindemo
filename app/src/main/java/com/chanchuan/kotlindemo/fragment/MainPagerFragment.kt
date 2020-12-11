@@ -1,10 +1,17 @@
 package com.chanchuan.kotlindemo.fragment
 
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.chanchuan.data.ArticleBean
+import com.chanchuan.data.DataX
 import com.chanchuan.kotlindemo.BaseFragment
 import com.chanchuan.kotlindemo.R
+import com.chanchuan.kotlindemo.adapter.MainPagerAdapter
+import com.chanchuan.kotlindemo.mainpager.IMainPagerView
+import com.chanchuan.kotlindemo.mainpager.MainPagerPresenter
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.refresh
+import kotlinx.android.synthetic.main.fragment_main_page.*
 
 /**
  *@author : Chanchuan
@@ -12,24 +19,48 @@ import kotlinx.android.synthetic.main.activity_main.*
  *
  *
  */
-class MainPagerFragment : BaseFragment(), OnRefreshLoadMoreListener {
-    var page: Int = 1;
+class MainPagerFragment : BaseFragment(), OnRefreshLoadMoreListener, IMainPagerView {
+    var mMainPagerPresenter: MainPagerPresenter? = null
+    var mMainPagerAdapter: MainPagerAdapter? = null
+    var mData: MutableList<DataX>? = mutableListOf()
+    var page: Int = 1
     override fun setLayoutId(): Int {
         return R.layout.fragment_main_page;
     }
 
     override fun initView() {
         refresh.setOnRefreshLoadMoreListener(this)
+        recyclerView.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        mMainPagerAdapter = MainPagerAdapter(requireActivity(), mData)
+        mMainPagerPresenter = MainPagerPresenter(this)
     }
 
     override fun initData() {
+        mMainPagerPresenter!!.getArticleList(page)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-
+        refreshLayout.finishRefresh()
+        page = 1
+        mMainPagerPresenter!!.getArticleList(page)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        TODO("Not yet implemented")
+        refreshLayout.finishLoadMore()
+        page++
+        mMainPagerPresenter!!.getArticleList(page)
+    }
+
+    override fun onSuccess(any: ArticleBean) {
+        if (page == 1) {
+            mData!!.clear()
+        }
+        mData?.addAll(any.data.datas)
+        mMainPagerAdapter!!.notifyDataSetChanged()
+    }
+
+    override fun onFailed(e: Throwable) {
+
     }
 }

@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
  *
  *
  */
-abstract class BaseObserver : Observer<Any?> {
+abstract class BaseObserver<T> : Observer<Any?> {
     private var mDisposable: Disposable? = null
     override fun onSubscribe(d: Disposable) {
         mDisposable = d
