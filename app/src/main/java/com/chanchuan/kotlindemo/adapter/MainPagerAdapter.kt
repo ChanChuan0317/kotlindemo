@@ -28,7 +28,7 @@ class MainPagerAdapter(var context: Context, var data: MutableList<DataX>?) :
         holder.itemView.run {
             mData!![position].let {
                 this.tv_title.text = it.author
-                this.tv_time.text = it.publishTime.toString()
+                this.tv_time.text = "${it.publishTime}"
                 this.tv_content.text = it.title
                 this.tv_classification.text = "${it.chapterName}·${it.superChapterName}"
             }

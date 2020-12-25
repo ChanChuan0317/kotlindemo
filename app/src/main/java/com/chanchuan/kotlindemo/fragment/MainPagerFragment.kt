@@ -12,6 +12,11 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.activity_main.refresh
 import kotlinx.android.synthetic.main.fragment_main_page.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 
 /**
  *@author : Chanchuan
@@ -23,17 +28,19 @@ class MainPagerFragment : BaseFragment(), OnRefreshLoadMoreListener, IMainPagerV
     var mMainPagerPresenter: MainPagerPresenter? = null
     var mMainPagerAdapter: MainPagerAdapter? = null
     var mData: MutableList<DataX>? = mutableListOf()
-    var page: Int = 1
+    var page: Int = 0
     override fun setLayoutId(): Int {
         return R.layout.fragment_main_page;
     }
 
     override fun initView() {
         refresh.setOnRefreshLoadMoreListener(this)
-        recyclerView.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mMainPagerAdapter = MainPagerAdapter(requireActivity(), mData)
         mMainPagerPresenter = MainPagerPresenter(this)
+        CoroutineScope(Dispatchers.Main).launch {
+
+        }
     }
 
     override fun initData() {
@@ -42,7 +49,7 @@ class MainPagerFragment : BaseFragment(), OnRefreshLoadMoreListener, IMainPagerV
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         refreshLayout.finishRefresh()
-        page = 1
+        page = 0
         mMainPagerPresenter!!.getArticleList(page)
     }
 
@@ -53,7 +60,7 @@ class MainPagerFragment : BaseFragment(), OnRefreshLoadMoreListener, IMainPagerV
     }
 
     override fun onSuccess(any: ArticleBean) {
-        if (page == 1) {
+        if (page == 0) {
             mData!!.clear()
         }
         mData?.addAll(any.data.datas)

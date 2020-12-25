@@ -2,6 +2,7 @@ package com.chanchuan.kotlindemo.fragment
 
 import com.chanchuan.kotlindemo.BaseFragment
 import com.chanchuan.kotlindemo.R
+import kotlinx.android.synthetic.main.fragment_knowledge.*
 
 /**
  *@author : Chanchuan
@@ -15,6 +16,7 @@ class KnowledgeFragment : BaseFragment() {
     }
 
     override fun initView() {
+
     }
 
     override fun initData() {

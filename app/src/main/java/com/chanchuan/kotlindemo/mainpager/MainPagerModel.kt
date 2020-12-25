@@ -20,31 +20,15 @@ class MainPagerModel : IMainPagerModel {
         NetManager.createApi().getArticleList(page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<ArticleBean> {
-                override fun onSubscribe(d: Disposable) {
+            .subscribe(object : BaseObserver<ArticleBean>() {
+                override fun onSuccess(t: Any) {
+                    onNetListener.onSuccess(t as ArticleBean)
                 }
 
-                override fun onNext(t: ArticleBean) {
-                    onNetListener.onSuccess(t)
-                }
-
-                override fun onError(e: Throwable) {
+                override fun onFailed(e: Throwable) {
                     onNetListener.onFailed(e)
                 }
 
-                override fun onComplete() {
-                }
-
             })
-//            .subscribe(object : BaseObserver<ArticleBean>() {
-//                override fun onSuccess(t: Any) {
-//                    onNetListener.onSuccess(t as ArticleBean)
-//                }
-//
-//                override fun onFailed(e: Throwable) {
-//                    onNetListener.onFailed(e)
-//                }
-//
-//            })
     }
 }

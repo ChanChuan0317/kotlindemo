@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chanchuan.data.net.ApiService
+import com.chanchuan.data.net.NetManager
 import com.gyf.immersionbar.ImmersionBar
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
@@ -35,34 +36,28 @@ class MainActivity : AppCompatActivity(), GankAdapter.RecyclerItemClick, OnRefre
     }
 
     private fun initData(page: Int) {
-        val build = Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(ApiService.urls.gankUrl)
-                .build()
+        val build = Retrofit.Builder().addCallAdapterFactory(RxJava2CallAdapterFactory.create()).addConverterFactory(GsonConverterFactory.create()).baseUrl(ApiService.urls.gankUrl).build()
         val girl = build.create(ApiService::class.java).getGirl(page)
-        girl.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<GankBean> {
-                    override fun onNext(t: GankBean) {
-                        val data = t.data
-                        if (page == 1) {
-                            mData.clear()
-                        }
-                        mData.addAll(data)
-                        mGankAdapter!!.notifyDataSetChanged()
-                    }
+        girl.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : Observer<GankBean> {
+            override fun onNext(t: GankBean) {
+                val data = t.data
+                if (page == 1) {
+                    mData.clear()
+                }
+                mData.addAll(data)
+                mGankAdapter!!.notifyDataSetChanged()
+            }
 
-                    override fun onError(e: Throwable) {
-                    }
+            override fun onError(e: Throwable) {
+            }
 
-                    override fun onSubscribe(d: Disposable) {
-                    }
+            override fun onSubscribe(d: Disposable) {
+            }
 
-                    override fun onComplete() {
-                    }
+            override fun onComplete() {
+            }
 
-                })
+        })
     }
 
     override fun onClick(position: Int) {

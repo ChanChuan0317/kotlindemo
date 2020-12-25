@@ -9,19 +9,19 @@ import com.chanchuan.data.ArticleBean
  *
  *
  */
-class MainPagerPresenter(mainPagerView: IMainPagerView) {
+class MainPagerPresenter(pMainPagerView: IMainPagerView) {
     private var mainPagerModel: IMainPagerModel? = MainPagerModel()
-    private var mainPagerView: IMainPagerView? = null
+    private var mainPagerView: IMainPagerView? = pMainPagerView
 
     fun getArticleList(page: Int) {
-        mainPagerModel?.getArticleList(page, object : OnNetListener<ArticleBean> {
+        mainPagerModel!!.getArticleList(page, object : OnNetListener<ArticleBean> {
             override fun onSuccess(any: ArticleBean) {
-                mainPagerView?.onSuccess(any)
+                mainPagerView!!.onSuccess(any)
             }
 
             override fun onFailed(e: Throwable) {
-                Log.e("chanchuan", e.message)
-                mainPagerView?.onFailed(e)
+                Log.e("chanchuan" + javaClass.name, e.message)
+                mainPagerView!!.onFailed(e)
             }
 
         })

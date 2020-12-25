@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.chanchuan.kotlindemo"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -59,4 +59,5 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT'
 }

@@ -3,6 +3,7 @@ package com.chanchuan.data.net
 import com.chanchuan.data.ArticleBean
 import com.chanchuan.data.BannerBean
 import com.chanchuan.data.PublicBean
+import com.chanchuan.data.QuestionBean
 import com.chanchuan.kotlindemo.GankBean
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -30,8 +31,11 @@ interface ApiService {
     @GET("banner/json")
     fun getBanner(): Observable<BannerBean>
 
+    //    https://www.wanandroid.com/article/list/0/json
     @GET("article/list/{page}/json")
     fun getArticleList(@Path("page") page: Int): Observable<ArticleBean>
 
+    @GET("wenda/list/{page}/json")
+    fun getQuestion(@Path("page") page: Int): Observable<QuestionBean>
 
 }
