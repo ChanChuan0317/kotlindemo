@@ -17,18 +17,18 @@ import io.reactivex.schedulers.Schedulers
  */
 class MainPagerModel : IMainPagerModel {
     override fun getArticleList(page: Int, onNetListener: OnNetListener<ArticleBean>) {
-        NetManager.createApi().getArticleList(page)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : BaseObserver<ArticleBean>() {
-                override fun onSuccess(t: Any) {
-                    onNetListener.onSuccess(t as ArticleBean)
-                }
-
-                override fun onFailed(e: Throwable) {
-                    onNetListener.onFailed(e)
-                }
-
-            })
+//        NetManager.createApi().getArticleList(page)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(object : BaseObserver<ArticleBean>() {
+//                override fun onSuccess(t: Any) {
+//                    onNetListener.onSuccess(t as ArticleBean)
+//                }
+//
+//                override fun onFailed(e: Throwable) {
+//                    onNetListener.onFailed(e)
+//                }
+//
+//            })
     }
 }

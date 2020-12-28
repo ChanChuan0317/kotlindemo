@@ -31,8 +31,6 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ll_login -> Navigation.findNavController(requireActivity(), R.id.navigation_main)
-            else {
-            }
         }
     }
 }

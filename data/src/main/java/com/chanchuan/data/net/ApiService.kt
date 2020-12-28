@@ -21,21 +21,36 @@ interface ApiService {
         var baseUrl = "https://www.wanandroid.com/"
     }
 
-
+    /**
+     * 福利妹子
+     */
     @GET("v2/data/category/Girl/type/Girl/page/{page}/count/10")
-    fun getGirl(@Path("page") page: Int): Observable<GankBean>
+    suspend fun getGirl(@Path("page") page: Int): GankBean
 
+    /**
+     * 微信公众号文章
+     */
     @GET("wxarticle/chapters/json")
-    fun getWxPublic(): Observable<PublicBean>
+    suspend fun getWxPublic(): PublicBean
 
+    /**
+     * 首页Banner
+     */
     @GET("banner/json")
-    fun getBanner(): Observable<BannerBean>
+    suspend fun getBanner(): BannerBean
 
+    /**
+     * 首页文章
+     */
     //    https://www.wanandroid.com/article/list/0/json
     @GET("article/list/{page}/json")
-    fun getArticleList(@Path("page") page: Int): Observable<ArticleBean>
+    suspend fun getArticleList(@Path("page") page: Int): ArticleBean
 
+    /**
+     * 解答文章
+     */
     @GET("wenda/list/{page}/json")
-    fun getQuestion(@Path("page") page: Int): Observable<QuestionBean>
+    suspend fun getQuestion(@Path("page") page: Int): QuestionBean
+
 
 }

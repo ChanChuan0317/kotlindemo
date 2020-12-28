@@ -2,7 +2,6 @@ package com.chanchuan.kotlindemo
 
 import android.content.Context
 import android.net.Uri
-import android.service.autofill.OnClickAction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,10 @@ import kotlinx.android.synthetic.main.item_gank.view.*
  *
  *
  */
-class GankAdapter(var context: Context, val gank: MutableList<Data>) : RecyclerView.Adapter<GankAdapter.ViewHolder>() {
+class GankAdapter(var context: Context, val gank: MutableList<GankBean.Data>) : RecyclerView.Adapter<GankAdapter.ViewHolder>() {
 
     private val mContext: Context? = context
-    private var mGank: MutableList<Data>? = gank
+    private var mGank: MutableList<GankBean.Data>? = gank
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

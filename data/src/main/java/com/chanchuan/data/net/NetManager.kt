@@ -10,15 +10,20 @@ import retrofit2.converter.gson.GsonConverterFactory
  *
  *
  */
-class NetManager {
+class NetManager private constructor() {
+    var apiService: ApiService
+
     companion object {
-        fun createApi(): ApiService {
-            return Retrofit.Builder()
+        val netManager: NetManager by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { NetManager() }
+    }
+
+    init {
+        apiService = Retrofit.Builder()
                 .baseUrl(ApiService.urls.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
                 .create(ApiService::class.java);
-        }
     }
+
 }

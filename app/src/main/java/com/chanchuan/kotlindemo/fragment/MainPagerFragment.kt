@@ -1,22 +1,19 @@
 package com.chanchuan.kotlindemo.fragment
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chanchuan.data.ArticleBean
 import com.chanchuan.data.DataX
+import com.chanchuan.data.net.NetManager
 import com.chanchuan.kotlindemo.BaseFragment
 import com.chanchuan.kotlindemo.R
 import com.chanchuan.kotlindemo.adapter.MainPagerAdapter
-import com.chanchuan.kotlindemo.mainpager.IMainPagerView
-import com.chanchuan.kotlindemo.mainpager.MainPagerPresenter
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.activity_main.refresh
 import kotlinx.android.synthetic.main.fragment_main_page.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
+import kotlinx.coroutines.withContext
 
 /**
  *@author : Chanchuan
@@ -24,8 +21,7 @@ import okhttp3.Dispatcher
  *
  *
  */
-class MainPagerFragment : BaseFragment(), OnRefreshLoadMoreListener, IMainPagerView {
-    var mMainPagerPresenter: MainPagerPresenter? = null
+class MainPagerFragment : BaseFragment(), OnRefreshLoadMoreListener {
     var mMainPagerAdapter: MainPagerAdapter? = null
     var mData: MutableList<DataX>? = mutableListOf()
     var page: Int = 0
@@ -35,39 +31,37 @@ class MainPagerFragment : BaseFragment(), OnRefreshLoadMoreListener, IMainPagerV
 
     override fun initView() {
         refresh.setOnRefreshLoadMoreListener(this)
-        recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mMainPagerAdapter = MainPagerAdapter(requireActivity(), mData)
-        mMainPagerPresenter = MainPagerPresenter(this)
-        CoroutineScope(Dispatchers.Main).launch {
+    }
 
-        }
+    private suspend fun getPublic(page: Int) = withContext(Dispatchers.IO) {
+        NetManager.netManager.apiService.getArticleList(page)
     }
 
     override fun initData() {
-        mMainPagerPresenter!!.getArticleList(page)
+        CoroutineScope(Dispatchers.Main).launch {
+            getPublic(page).run {
+                if (page == 1) {
+                    mData?.clear()
+                }
+                mData?.addAll(this.data.datas)
+                mMainPagerAdapter!!.notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         refreshLayout.finishRefresh()
         page = 0
-        mMainPagerPresenter!!.getArticleList(page)
+        initData()
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         refreshLayout.finishLoadMore()
         page++
-        mMainPagerPresenter!!.getArticleList(page)
+        initData()
     }
 
-    override fun onSuccess(any: ArticleBean) {
-        if (page == 0) {
-            mData!!.clear()
-        }
-        mData?.addAll(any.data.datas)
-        mMainPagerAdapter!!.notifyDataSetChanged()
-    }
-
-    override fun onFailed(e: Throwable) {
-
-    }
 }

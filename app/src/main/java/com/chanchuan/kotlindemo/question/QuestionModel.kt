@@ -17,19 +17,19 @@ import java.util.*
  */
 class QuestionModel : IQuestionModel {
     override fun getQuestion(pPage: Int, pOnNetListener: OnNetListener<QuestionBean>) {
-        val question = NetManager.createApi().getQuestion(pPage)
-        question.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : BaseObserver<QuestionBean>() {
-                override fun onSuccess(t: Any) {
-                    pOnNetListener.onSuccess(t as QuestionBean)
-                }
-
-                override fun onFailed(e: Throwable) {
-                    pOnNetListener.onFailed(e)
-                }
-
-            })
+//        val question = NetManager.createApi().getQuestion(pPage)
+//        question.subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(object : BaseObserver<QuestionBean>() {
+//                override fun onSuccess(t: Any) {
+//                    pOnNetListener.onSuccess(t as QuestionBean)
+//                }
+//
+//                override fun onFailed(e: Throwable) {
+//                    pOnNetListener.onFailed(e)
+//                }
+//
+//            })
     }
 
 }

@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.chanchuan.data.Data;
+import androidx.work.Data;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
  * Date       : 2020/12/11/011    下午 1:29
  */
 public class Gank2Adapter extends BaseAdapter {
-    private List<com.chanchuan.kotlindemo.Data> mData;
+    private List<GankBean.Data> mData;
     private Context mContext;
 
-    public Gank2Adapter(List<com.chanchuan.kotlindemo.Data> mData, Context mContext) {
+    public Gank2Adapter(List<GankBean.Data> mData, Context mContext) {
         this.mData = mData;
         this.mContext = mContext;
     }
@@ -33,7 +34,7 @@ public class Gank2Adapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        com.chanchuan.kotlindemo.Data data = mData.get(position);
+        GankBean.Data data = mData.get(position);
         return data;
     }
 
@@ -50,7 +51,7 @@ public class Gank2Adapter extends BaseAdapter {
             holder = new ViewHolder();
 
             holder.simpleDraweeView = convertView.findViewById(R.id.sdv_image);
-            com.chanchuan.kotlindemo.Data data = mData.get(position);
+            GankBean.Data data = mData.get(position);
             holder.simpleDraweeView.setImageURI(Uri.parse(data.getUrl()));
             convertView.setTag(holder);
         } else {
