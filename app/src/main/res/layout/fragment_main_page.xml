@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smart.refresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/refresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <com.scwang.smart.refresh.header.ClassicsHeader
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <q.rorbin.verticaltablayout.VerticalTabLayout
+        android:id="@+id/vtl_title"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="wrap_content"
+        app:indicator_corners="@dimen/dp_10"
+        app:indicator_gravity="left"
+        app:tab_mode="scrollable" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_viewPager"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
-    <com.scwang.smart.refresh.footer.ClassicsFooter
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</com.scwang.smart.refresh.layout.SmartRefreshLayout>
+</LinearLayout>

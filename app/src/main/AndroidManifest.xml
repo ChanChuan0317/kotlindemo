@@ -17,7 +17,6 @@
         <!--        <activity android:name=".activity.DemoActivity"></activity>-->
         <activity android:name=".WebViewActivity" />
         <activity android:name=".HomeActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

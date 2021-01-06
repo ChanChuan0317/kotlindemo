@@ -8,6 +8,7 @@ import com.chanchuan.data.net.NetManager
 import com.gyf.immersionbar.ImmersionBar
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.chanchuan.kotlindemo.GankBean
+import com.chanchuan.kotlindemo.interfaces.RecyclerItemClick
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
@@ -15,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity(), GankAdapter.RecyclerItemClick, OnRefreshLoadMoreListener {
+class MainActivity : AppCompatActivity(), RecyclerItemClick, OnRefreshLoadMoreListener {
     var mGankAdapter: GankAdapter? = null
     var mData: MutableList<GankBean.Data> = mutableListOf()
     var page: Int = 1
@@ -28,27 +29,28 @@ class MainActivity : AppCompatActivity(), GankAdapter.RecyclerItemClick, OnRefre
         recyclerview.adapter = mGankAdapter
         mGankAdapter!!.setRecyclerItemClick(this)
         refresh.setOnRefreshLoadMoreListener(this)
-        initData(page)
+
+        getUrl(page)
     }
 
-    private suspend fun getGirl(page: Int) = withContext(Dispatchers.IO) {
-        NetManager.netManager.apiService.getGirl(1)
+    private suspend fun getGirl(pPage: Int) = withContext(Dispatchers.IO) {
+        NetManager.netManager.apiService.getGirl(pPage)
     }
 
-    private fun initData(page: Int) {
-//        CoroutineScope(Dispatchers.Main).launch {
-//            getGirl(page).run {
-//                if (page == 1) {
-//                    mData.clear()
-//                }
-//                mData.addAll(this.data)
-//                mGankAdapter!!.notifyDataSetChanged()
-//            }
-//        }
 
+    private fun getUrl(pPage: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            getGirl(pPage).run {
+                if (pPage == 1) {
+                    mData.clear()
+                }
+                mData.addAll(this.data)
+                mGankAdapter!!.notifyDataSetChanged()
+            }
+        }
     }
 
-    override fun onClick(position: Int) {
+    override fun itemClick(position: Int) {
         var intent = Intent(this, ImageActivity::class.java)
         intent.putExtra("girl", mData[position].url)
         startActivity(intent)
@@ -57,13 +59,13 @@ class MainActivity : AppCompatActivity(), GankAdapter.RecyclerItemClick, OnRefre
     override fun onRefresh(refreshLayout: RefreshLayout) {
         refreshLayout.finishRefresh()
         page = 1
-        initData(page)
+        getUrl(page)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         refreshLayout.finishLoadMore()
         page++
-        initData(page)
+        getUrl(page)
     }
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.chanchuan.kotlindemo.interfaces.RecyclerItemClick
 import kotlinx.android.synthetic.main.item_gank.view.*
 
 /**
@@ -33,7 +34,7 @@ class GankAdapter(var context: Context, val gank: MutableList<GankBean.Data>) : 
             mGank!![position].let {
                 this.sdv_image.setImageURI(Uri.parse(it.url))
                 this.setOnClickListener {
-                    mRecyclerItemClick?.onClick(position)
+                    mRecyclerItemClick?.itemClick(position)
                 }
             }
         }
@@ -43,9 +44,6 @@ class GankAdapter(var context: Context, val gank: MutableList<GankBean.Data>) : 
         return mGank!!.size
     }
 
-    interface RecyclerItemClick {
-        fun onClick(position: Int)
-    }
 
     private var mRecyclerItemClick: RecyclerItemClick? = null
 

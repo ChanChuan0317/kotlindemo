@@ -1,13 +1,11 @@
 package com.chanchuan.data.net
 
-import com.chanchuan.data.ArticleBean
-import com.chanchuan.data.BannerBean
-import com.chanchuan.data.PublicBean
-import com.chanchuan.data.QuestionBean
+import com.chanchuan.data.*
 import com.chanchuan.kotlindemo.GankBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  *@author : Chanchuan
@@ -53,4 +51,15 @@ interface ApiService {
     suspend fun getQuestion(@Path("page") page: Int): QuestionBean
 
 
+    /**
+     * 项目tab
+     */
+    @GET("project/tree/json")
+    suspend fun getProject(): ProjectBean
+
+    /**
+     * 项目tabl子类
+     */
+    @GET("project/list/{page}/json")
+    suspend fun getChildProject(@Path("page") page: Int, @Query("cid") cid: Int): ProChildBean
 }

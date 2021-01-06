@@ -19,11 +19,11 @@ class NetManager private constructor() {
 
     init {
         apiService = Retrofit.Builder()
-                .baseUrl(ApiService.urls.baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-                .create(ApiService::class.java);
+            .baseUrl(ApiService.urls.baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+            .create(ApiService::class.java);
     }
 
 }
