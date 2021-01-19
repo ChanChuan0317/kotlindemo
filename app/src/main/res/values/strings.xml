@@ -2,4 +2,12 @@
     <string name="app_name">KotlinDemo</string>
     <string name="open">打开</string>
     <string name="close">关闭</string>
+    <string name="et_hint">请在这里输入文字</string>
+    <string name="cb_text_A">A</string>
+    <string name="cb_text_B">B</string>
+    <string name="cb_text_C">C</string>
+    <string name="cb_text_D">D</string>
+    <string name="cb_text_E">E</string>
+    <string name="cb_text_F">F</string>
+    <string name="cb_text_G">G</string>
 </resources>

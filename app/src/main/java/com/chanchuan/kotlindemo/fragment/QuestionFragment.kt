@@ -82,13 +82,13 @@ class QuestionFragment : BaseFragment(), OnRefreshLoadMoreListener, IQuestionVie
     }
 
     override fun onFailed(pThrowable: Throwable) {
-        Log.e("error" + javaClass.name, pThrowable.message)
+        Log.e("error" + javaClass.name, pThrowable.message!!)
     }
 
     override fun itemClick(position: Int) {
         var intent = Intent(activity, WebViewActivity::class.java)
         val link = mData[position].link
-        intent.putExtra("questionLink", link)
+        intent.putExtra("link", link)
         activity?.startActivity(intent)
     }
 }

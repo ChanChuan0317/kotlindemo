@@ -1,8 +1,9 @@
 package com.chanchuan.kotlindemo
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 
 /**
  *@author : Chanchuan
@@ -10,10 +11,21 @@ import androidx.appcompat.app.AppCompatActivity
  *
  *
  */
-abstract class BaseActivity :AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(setLayoutId())
+        immersionBar {
+            statusBarColor(R.color.transparent)
+            navigationBarColor(R.color.transparent)
+        }
+//        StatusBarUtil.setStatusBarTranslucent(this, false)
+//        if (StatusBarUtil.isXiaomi()) {
+//            StatusBarUtil.setXiaomiStatusBar(window, false)
+//        }
+//        if (StatusBarUtil.isMeizu()) {
+//            StatusBarUtil.setMeizuStatusBar(window, false)
+//        }
         initView()
         initData()
     }

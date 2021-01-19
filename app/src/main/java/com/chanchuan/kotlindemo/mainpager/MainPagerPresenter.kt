@@ -20,7 +20,7 @@ class MainPagerPresenter(pMainPagerView: IMainPagerView) {
             }
 
             override fun onFailed(e: Throwable) {
-                Log.e("chanchuan" + javaClass.name, e.message)
+                Log.e("chanchuan" + javaClass.name, e.message!!)
                 mainPagerView!!.onFailed(e)
             }
 

@@ -1,10 +1,21 @@
 package com.chanchuan.kotlindemo.fragment
 
+import android.graphics.Color
+import android.graphics.Typeface
+import android.util.TypedValue
+import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.chanchuan.kotlindemo.BaseFragment
 import com.chanchuan.kotlindemo.R
 import com.chanchuan.kotlindemo.adapter.VtbAdapter
+import com.chanchuan.kotlindemo.util.KeyBoardUtils
+import kotlinx.android.synthetic.main.fragment_demo.*
 import kotlinx.android.synthetic.main.fragment_main_page.*
+import q.rorbin.verticaltablayout.VerticalTabLayout
+import q.rorbin.verticaltablayout.widget.TabView
+import java.lang.reflect.TypeVariable
+
 
 /**
  *@author : Chanchuan
@@ -12,23 +23,16 @@ import kotlinx.android.synthetic.main.fragment_main_page.*
  *
  *
  */
-class MainPagerFragment : BaseFragment() {
-    var mTitle = mutableListOf<String>()
-    var mData = mutableListOf<Fragment>()
+class MainPagerFragment : BaseFragment(), View.OnClickListener {
     override fun setLayoutId(): Int {
-        return R.layout.fragment_main_page;
+        return R.layout.fragment_demo;
     }
 
+
     override fun initView() {
-        mTitle.add("课程")
-        mTitle.add("品牌")
-        val demoFragment = DemoFragment()
-        val demoFragment2 = DemoFragment()
-        mData.add(demoFragment)
-        mData.add(demoFragment2)
-        val vtbAdapter = VtbAdapter(fragmentManager, mTitle, mData)
-        vp_viewPager.adapter = vtbAdapter
-        vtl_title.setupWithViewPager(vp_viewPager)
+        btn_show.setOnClickListener(this)
+        btn_hide.setOnClickListener(this)
+
     }
 
 //    private suspend fun getPublic(page: Int) = withContext(Dispatchers.IO) {
@@ -46,5 +50,17 @@ class MainPagerFragment : BaseFragment() {
 //            }
 //        }
     }
+
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.btn_show -> {
+                KeyBoardUtils.showKeyBoard(requireActivity(), btn_show)
+            }
+            R.id.btn_hide -> {
+                KeyBoardUtils.hideKeyBoard(requireActivity(), btn_hide)
+            }
+        }
+    }
+
 
 }

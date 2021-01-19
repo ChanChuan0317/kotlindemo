@@ -302,5 +302,41 @@
                 app:tint="@color/third" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_et_demo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_weight="0.1"
+                android:src="@drawable/ic_setting"
+                app:tint="@color/main" />
+
+            <com.chanchuan.kotlindemo.util.EditTextWithDel
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入"
+                android:textColor="@color/text_surface"
+                android:textSize="@dimen/sp_15" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_weight="0.1"
+                android:rotation="180"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_back"
+                app:tint="@color/third" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
